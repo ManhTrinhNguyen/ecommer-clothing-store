@@ -1,5 +1,12 @@
+import { UNSAFE_warning } from "@remix-run/router";
 import { initializeApp } from "firebase/app"
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import {
+  getAuth,
+  signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword
+} from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 
@@ -26,7 +33,9 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect =() => signInWithRedirect(auth, googleProvider)
 export const db = getFirestore(fireBaseApp)
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInfomation = {}) => {
+  if (!userAuth) return 
+
   const userDocRef = doc(db, "users", userAuth.uid)
 
   const userSnapshot = await getDoc(userDocRef);
@@ -40,11 +49,18 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       await setDoc(userDocRef, {
         displayName, 
         email, 
-        whenCreatedAt
+        whenCreatedAt,
+        ...additionalInfomation
        })
     } catch (err) {
       console.log(`error creating the user ${err.message}`);
     }
   } 
   return userDocRef 
+}
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if(!email || !password) return 
+  const response = await createUserWithEmailAndPassword(auth, email, password)
+  return response
 }

@@ -6,6 +6,7 @@ import {
   auth
 } from "../../utils/firebase/Firebase.js"
 import { getRedirectResult } from 'firebase/auth'
+import SignUp from '../../components/sign-up/SignUp.jsx'
 
 function SignInWithGoogle() {
 
@@ -28,6 +29,7 @@ function SignInWithGoogle() {
       <h1>Signin</h1>
       <button onClick={logGoogleUser}>Sign in With Google Popup</button>
       <button onClick={signInWithGoogleRedirect}>Sign in With Google Redirect</button>
+      <SignUp />
     </div>
   )
 }
