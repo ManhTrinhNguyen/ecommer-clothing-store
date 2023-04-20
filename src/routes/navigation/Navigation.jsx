@@ -18,6 +18,9 @@ function Navigation() {
           <Link className='nav-link' to="/sign-in">
             Sign In
           </Link>
+          <Link className='nav-link' to="/sign-in-phone-number">
+            Sign In With Phone Number
+          </Link>
         </div>
       </div>
       <Outlet />

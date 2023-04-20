@@ -5,7 +5,8 @@ import {
 import Home from "./routes/home/Home";
 import Shop from "./routes/shop/Shop";
 import Navigation from "./routes/navigation/Navigation";
-import SignIn from "./routes/sign-in/SignIn";
+import SignInWithGoogle from "./routes/sign-in/SignInWithGoogle";
+
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "sign-in",
-        element: <SignIn />
+        element: <SignInWithGoogle />
       }
     ]
   }
