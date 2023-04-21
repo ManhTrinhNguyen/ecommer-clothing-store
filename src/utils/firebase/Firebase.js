@@ -33,7 +33,7 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect =() => signInWithRedirect(auth, googleProvider)
 export const db = getFirestore(fireBaseApp)
 
-export const createUserDocumentFromAuth = async (userAuth, additionalInfomation = {}) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInfomation = { }) => {
   if (!userAuth) return 
 
   const userDocRef = doc(db, "users", userAuth.uid)
