@@ -1,11 +1,13 @@
-import { UNSAFE_warning } from "@remix-run/router";
+
 import { initializeApp } from "firebase/app"
 import {
   getAuth,
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, 
+  GithubAuthProvider
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -21,16 +23,22 @@ const firebaseConfig = {
 
 const fireBaseApp = initializeApp(firebaseConfig);
 
+// Google Provider
 const googleProvider = new GoogleAuthProvider();
-
+// Github Provider
+const gitHubProvider = new GithubAuthProvider();
 
 googleProvider.setCustomParameters({
   prompt: "select_account"
 })
 
 export const auth = getAuth()
+// Sign in with Google
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
-export const signInWithGoogleRedirect =() => signInWithRedirect(auth, googleProvider)
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
+// Signin With Git Hub
+export const signInWithGitHubPopup = () => signInWithPopup(auth, gitHubProvider)
+// Firestore
 export const db = getFirestore(fireBaseApp)
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfomation = { }) => {
@@ -59,8 +67,15 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfomation 
   return userDocRef 
 }
 
+// Create user with email and password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if(!email || !password) return 
   const response = await createUserWithEmailAndPassword(auth, email, password)
   return response
+}
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) {
+    return 
+  }
+  return await signInWithEmailAndPassword(auth, email, password)
 }

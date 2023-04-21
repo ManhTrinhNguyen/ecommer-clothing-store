@@ -5,7 +5,7 @@ import {
 import Home from "./routes/home/Home";
 import Shop from "./routes/shop/Shop";
 import Navigation from "./routes/navigation/Navigation";
-import SignInWithGoogle from "./routes/sign-in/SignInWithGoogle";
+import Authentication from "./routes/authentication/Authentication";
 
 
 const router = createBrowserRouter([
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
         element: <Shop />
       },
       {
-        path: "sign-in",
-        element: <SignInWithGoogle />
+        path: "authentication",
+        element: <Authentication />
       }
     ]
   }
