@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/Firebase';
 import FormInput from '../form-input/FormInput';
 import "./sign-up-form.style.scss"
@@ -11,6 +11,8 @@ function SignUp() {
     displayName: "",
     confirmPassword: "",
   })
+ 
+
   const { email, password, displayName, confirmPassword } = userInfomations
   
   function resetFormField() {
