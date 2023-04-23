@@ -5,9 +5,12 @@ import { ReactComponent as CrwnLogo } from "../../assets/crown (1).svg"
 import "./navigation.styles.scss"
 import { UserContext } from '../../context/UserContext';
 import { signOutAuthUser } from '../../utils/firebase/Firebase';
-
+import CartIcon from '../../components/cart-icon/CartIcon';
+import CartDropdown from '../../components/cart-dropdown/CartDropdown';
+import { ToggleContext } from '../../context/ToggleContext';
 function Navigation() {
   const { currentUser } = useContext(UserContext)
+  const {handleToggle, toggle} = useContext(ToggleContext)
 
    async function signOutUser() {
      await signOutAuthUser();
@@ -29,10 +32,11 @@ function Navigation() {
             (
             <Link className='nav-link' to="/authentication">
               Sign In
-            </Link>
-          )}
-          
+              </Link>
+            )}
+          <CartIcon />
         </div>
+        {toggle && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>
