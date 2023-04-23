@@ -7,10 +7,10 @@ import { UserContext } from '../../context/UserContext';
 import { signOutAuthUser } from '../../utils/firebase/Firebase';
 import CartIcon from '../../components/cart-icon/CartIcon';
 import CartDropdown from '../../components/cart-dropdown/CartDropdown';
-import { ToggleContext } from '../../context/ToggleContext';
+import { CartContext } from '../../context/CartContext';
 function Navigation() {
   const { currentUser } = useContext(UserContext)
-  const {handleToggle, toggle} = useContext(ToggleContext)
+  const {toggle} = useContext(CartContext)
 
    async function signOutUser() {
      await signOutAuthUser();

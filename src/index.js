@@ -5,15 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './context/UserContext';
 import { ProductsProvider } from './context/ProductsContext';
-import { ToggleContextProvider } from './context/ToggleContext';
+import { CartContextProvider } from './context/CartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <UserProvider>
     <ProductsProvider>
-      <ToggleContextProvider>
+      <CartContextProvider>
         <App />
-      </ToggleContextProvider>
+      </CartContextProvider>
     </ProductsProvider>
   </UserProvider>
 );
