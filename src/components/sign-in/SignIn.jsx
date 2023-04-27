@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import FormInput from '../form-input/FormInput';
-import "./sign-in.styles.scss"
+import { SignInContainer, SignInTitle } from './sign-in.styles';
 import Button from '../button/Button';
 import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword, signInWithGitHubPopup } from '../../utils/firebase/Firebase';
 
@@ -63,8 +63,8 @@ function SignIn() {
     ))
   }
   return (
-    <div className='sign-in-container'>
-      <h2>Already have an account?</h2>
+    <SignInContainer>
+      <SignInTitle>Already have an account?</SignInTitle>
       <span>Sign In with your email and password</span>
       <form onSubmit={handleSubmit}>
         {/* Email Address */}
@@ -78,7 +78,7 @@ function SignIn() {
         </div>
         
       </form>
-    </div>
+    </SignInContainer>
   )
 }
 
