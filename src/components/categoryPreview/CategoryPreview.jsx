@@ -1,15 +1,14 @@
 import React from 'react'
 import ProductCart from '../product-card/ProductCart'
-import "./categoryPreview.styles.scss"
-import { Link } from 'react-router-dom'
+import { CategoryPreviewContainer, Title, Preview } from './categoryPreview.styles'
 
 function CategoryPreview({ title, products }) {
   return (
-    <div className='category-preview-container'>
+    <CategoryPreviewContainer>
       <h2>
-        <Link className='title' to={title}>{ title.toUpperCase() }</Link>
+        <Title to={title}>{ title.toUpperCase() }</Title>
       </h2>
-      <div className='preview'>
+      <Preview>
         {
           products
             .filter((_, idx) => idx < 4)
@@ -17,8 +16,8 @@ function CategoryPreview({ title, products }) {
               <ProductCart key={product.id} product={product} />
             ))
         }
-      </div>
-    </div>
+      </Preview>
+    </CategoryPreviewContainer>
   )
 }
 

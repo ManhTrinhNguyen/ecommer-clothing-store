@@ -8,6 +8,10 @@ export const SignInContainer = styled.div`
 export const SignInTitle = styled.h2`
   margin: 10px 0;
 `
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 // .sign-in-container {
 //   display: flex;
 //   flex-direction: column;
