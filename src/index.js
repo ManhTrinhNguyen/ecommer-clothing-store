@@ -3,23 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { UserProvider } from './context/UserContext';
-import { CartContextProvider } from './context/CartContext';
-import { CategoriesProvider } from './context/CategoriesContext';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store, persistor } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from './utils/stripe/stripe.utils';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <UserProvider>
-      <CategoriesProvider >
-        <CartContextProvider>
-            <App />
-          </CartContextProvider>
-      </CategoriesProvider >
-    </UserProvider>
-  </BrowserRouter>
-  
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

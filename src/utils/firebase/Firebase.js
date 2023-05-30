@@ -68,7 +68,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfomation 
       console.log(`error creating the user ${err.message}`);
     }
   } 
-  return userDocRef 
+  return userSnapshot
  
 }
 
@@ -89,14 +89,11 @@ export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef)
 
-  const querySnapshot = await getDocs(q); 
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc
-  }, {});
+  const querySnapshot = await getDocs(q);
 
-  return categoryMap
+  return querySnapshot.docs.map(docSnapshot => docSnapshot.data()) 
+
+  // return categoryMap
 }
 
 // Create user with email and password
@@ -118,4 +115,17 @@ export const signOutAuthUser = () => {
 }
 export const onAuthStateChangedListener = (callback) => {
   return onAuthStateChanged(auth, callback)
+}
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe()
+        resolve(userAuth)
+      },
+      reject
+    )
+  })
 }
